@@ -36,7 +36,7 @@
 // TODO: Add values for below variables
 #define NS 129          // Number of samples in LUT
 #define TIM2CLK 8000000 // STM Clock frequency
-#define F_SIGNAL 1      // Frequency of output analog signal
+#define F_SIGNAL 50     // Frequency of output analog signal
 /* USER CODE END PD */
 
 /* Private macro -------------------------------------------------------------*/
@@ -73,7 +73,6 @@ static void MX_TIM3_Init(void);
 
 /* USER CODE BEGIN PFP */
 void EXTI0_1_IRQHandler(void);
-void writeLCD(char *char_in);
 /* USER CODE END PFP */
 
 /* Private user code ---------------------------------------------------------*/
@@ -140,17 +139,10 @@ int main(void)
   while (1)
   {
     /* USER CODE END WHILE */
-    HAL_Delay(delay_t);
+    //HAL_Delay(delay_t);
     /* USER CODE BEGIN 3 */
   }
   /* USER CODE END 3 */
-}
-
-void writeLCD(char *char_in)
-{
-  // delay(3000);
-  // lcd_command(CLEAR);
-  lcd_putstring(char_in);
 }
 
 /**
@@ -361,7 +353,7 @@ void EXTI0_1_IRQHandler(void)
   // TODO: Debounce using HAL_GetTick()
   curr_millis = HAL_GetTick();
 
-  if (curr_millis - prev_millis >= 1000)
+  if (curr_millis - prev_millis >= 250)
   {
     prev_millis = HAL_GetTick();
   }
